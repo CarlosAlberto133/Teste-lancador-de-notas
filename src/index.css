@@ -5,6 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --border-radius-default: 20px;
+  --margin-left-default: 15px;
+  --margin-bottom-default: 50px;
+  --height-default: 146px;
 }
 
 code {

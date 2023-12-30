@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Bimestre1 from './components/bimestres/bimestre1/Bimestre1'
+import Bimestre2 from './components/bimestres/bimestre2/Bimestre2'
+import Bimestre3 from './components/bimestres/bimestre3/Bimestre3'
+import Bimestre4 from './components/bimestres/bimestre4/Bimestre4'
+import './App.css'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <div className='containerApp'>
+        <div>
+          <Bimestre1 />
+        </div>
+        <div>
+          <Bimestre2 />
+        </div>
+        <div>
+          <Bimestre3 />
+        </div>
+        <div>
+          <Bimestre4 />
+        </div>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,38 +1,55 @@
-.App {
-  text-align: center;
+.App { 
+  background-color: #0F0F0F;
+  height: 100%;
+  width: 100vw;
+  
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.containerApp {
+  padding: 50px 100px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (max-width: 600px) {
+  .containerApp {
+    padding: 50px 30px;
+  }
+  
+  .container .trash {
+    margin-left: 2px;
+  }
+  .infoContainer {
+    margin: 20px 0 20px 0;
+  }
+  .cardBiologia {
+    margin-bottom: 25px;
+  }
+  .container .cardBiologia {
+    margin-bottom: 25px;
+  }
+  .container .cardArtes {
+    margin-bottom: 25px;
+  }
+  .container .cardGeografia {
+    margin-bottom: 15px;
+  }
+  .container .cardSociologia {
+    margin-bottom: 15px;
+  }
+  
+  .btn {
+    font-size: 0;
+    justify-content: center;
+    width: 58px;
+    margin-right: 25px
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (max-width: 430px) {
+  .containerApp {
+    padding: 50px 20px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .cardContainer {
+    width: 130px;
   }
 }
