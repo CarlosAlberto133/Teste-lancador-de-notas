@@ -25,7 +25,7 @@ export default function Cards({ disciplina, dataDeLancamento, nota } : CardsProp
     }
 
     const colorClasses = getTextColor()
-    const formattedDate = format(new Date(dataDeLancamento), 'dd/MM/yyyy')
+    const formattedDate = dataDeLancamento ? format(new Date(dataDeLancamento), 'dd/MM/yyyy') : '';
 
     return (
         <div className="card-container">

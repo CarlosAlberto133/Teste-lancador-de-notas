@@ -1,9 +1,7 @@
 import Bimestre from '../bimestre/Bimestre'
 
-const disciplinas = ['Biologia', 'Artes', 'Sociologia', 'Geografia']
-
 const Bimestre2 = () => {
-  
+  const disciplinas = ['Biologia', 'Artes', 'Sociologia', 'Geografia']
   return <Bimestre 
             bimestreAtual="Bimestre 2" 
             bimestreNome="SEGUNDO" 

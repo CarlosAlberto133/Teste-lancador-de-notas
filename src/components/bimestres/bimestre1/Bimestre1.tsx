@@ -7,7 +7,7 @@ const Bimestre1 = () => {
   return <Bimestre 
             bimestreAtual="Bimestre 1" 
             bimestreNome="PRIMEIRO" 
-            disciplinas={disciplinas} 
+            disciplinas={disciplinas}
         />
 };
 

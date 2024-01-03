@@ -40,18 +40,16 @@ function Bimestre({ bimestreNome, disciplinas, bimestreAtual }: BimestreProps) {
       console.error('Erro ao excluir nota:', error)
     }
   }
-
+  
   const fetchData = async () => {
     try {
       const response = await axios.get<Nota[]>(`http://localhost:3333/resultados/${bimestreNome}`)
-      setNotas(response.data ?? [])
-      
-  console.log(response.data ?? [])
+      setNotas(response.data ?? []);
     } catch (error) {
       console.error(`Erro ao obter notas do ${bimestreNome}:`, error)
     }
   }
-
+  
   useEffect(() => {
     fetchData()
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -65,7 +63,8 @@ function Bimestre({ bimestreNome, disciplinas, bimestreAtual }: BimestreProps) {
           <BtnLancarNota onClick={handleOpenModal} />
           <span className="tooltip-text">Adicionar</span>
         </div>
-      </div><div className='container-card'>
+      </div>
+      <div className='container-card'>
         {notas.map((nota) => (
           <div className='card' key={nota.id}>
             <div className={`card${nota.disciplina}`}>
