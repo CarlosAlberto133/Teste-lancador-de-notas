@@ -1,83 +1,90 @@
-import { useState } from 'react';
+import { useState, useEffect  } from 'react'
+import axios from 'axios'
 import Card from '../../card/Cards'
 import Trash from '../../../assets/Trash.svg'
 import BtnLancarNota from '../../btn/BtnLancarNota'
-import Modal from '../../modal/Modal';
+import Modal from '../../modal/Modal'
 import './Bimestre1.css'
 
+interface Nota {
+    id: string;
+    disciplina: string;
+    criadoEm: string; // ou outro tipo para representar a data
+    nota: string; // ou outro tipo para representar a nota
+}
+
 function Bimestre1() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [notas, setNotas] = useState<Nota[]>([])
+    const bimestreNome = "Bimestre 1"
 
     const handleOpenModal = () => {
-        setIsModalOpen(true);
+        setIsModalOpen(true)
       };
 
     const handleCloseModal = () => {
-        setIsModalOpen(false);
+        setIsModalOpen(false)
+        fetchData()
     };
+
+    const handleDelete = async (notaId: string) => {
+        try {
+          await axios.delete(`http://localhost:3333/resultados/${notaId}`);
+          fetchData();
+        } catch (error) {
+          console.error('Erro ao excluir nota:', error);
+        }
+    };
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get<Nota[]>('http://localhost:3333/resultados/PRIMEIRO')
+            setNotas(response.data ?? [])
+        } catch (error) {
+            console.error('Erro ao obter notas do bimestre1:', error)
+        }
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     return (
         <div className='container'>
             <div className='infoContainer'>
                 <label className='bimestres'>Bimestre 1</label>
-                <BtnLancarNota  onClick={handleOpenModal} />
+                <div className="tooltip-container">
+                    <BtnLancarNota  onClick={handleOpenModal} />
+                    <span className="tooltiptext">Adicionar</span>
+                </div>
             </div>
             <div className='containerCard'>
-                <div className='card'>
-                    <div className='cardBiologia'>
-                        <Card
-                            disciplina="Biologia"
-                            dataDeLançamento="01/01/2001"
-                            nota="5"
-                        />
+                {notas.map((nota) => (
+                    <div className='card' key={nota.id}>
+                        <div className={`card${nota.disciplina}`}>
+                            <Card
+                                disciplina={nota.disciplina}
+                                dataDeLancamento={nota.criadoEm}
+                                nota={nota.nota.toString()}
+                            />
+                        </div>
+                        <div>
+                            <button className='deleteButton' onClick={() => handleDelete(nota.id)}>
+                                <img className='trash' src={Trash} alt='trash' />
+                                <span className="tooltiptext">Remover</span>
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                        <img className='trash' src={Trash} alt='trash' />
-                    </div>
-                </div>
-                
-                <div className='card'>
-                    <div className='cardArtes'>
-                        <Card 
-                            disciplina="Artes"
-                            dataDeLançamento="01/01/2001"
-                            nota="5"
-                        />
-                    </div>
-                    <div>
-                        <img className='trash' src={Trash} alt='trash' />
-                    </div>
-                </div>
-
-                <div className='card'>
-                    <div className='cardGeografia'>
-                        <Card 
-                            disciplina="Geografia"
-                            dataDeLançamento="01/01/2001"
-                            nota="5"
-                        />
-                    </div>
-                    <div>
-                        <img className='trash' src={Trash} alt='trash' />
-                    </div>
-                </div>
-
-                <div className='card'>
-                    <div className='cardSociologia'>
-                        <Card 
-                            disciplina="Sociologia"
-                            dataDeLançamento="01/01/2001"
-                            nota="5"
-                        />
-                    </div>
-                    <div>
-                        <img className='trash' src={Trash} alt='trash' />
-                    </div>
-                </div>
+                ))}
             </div>
-            <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+            <Modal 
+                isOpen={isModalOpen} 
+                onClose={handleCloseModal} 
+                bimestreNome={bimestreNome}
+                bimestre="PRIMEIRO"
+                disciplinas={['Biologia', 'Artes', 'Geografia', 'Sociologia']}
+            >
                 {/* Conteúdo do seu modal aqui */}
-                <h2>Conteúdo do Modal</h2>
                 <p>Qualquer conteúdo desejado pode ser adicionado aqui.</p>
             </Modal>
         </div>

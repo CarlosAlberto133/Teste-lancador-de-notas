@@ -16,6 +16,34 @@
     margin: 20px 0 40px 0;
 }
 
+.tooltip-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.tooltip-container .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-container:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
 .bimestres {
     color: #fff;
     font-size: 18px;
@@ -53,9 +81,41 @@
     border-radius: var(--border-radius-default);
     margin-bottom: var(--margin-bottom-default);
 }
+  
+.deleteButton:hover img {
+    filter: brightness(80%);
+}
 
 .container .trash {
     margin-left: var(--margin-left-default);
     cursor: pointer;
 }
+ 
+.deleteButton {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
 
+.tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+  
+.deleteButton:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}

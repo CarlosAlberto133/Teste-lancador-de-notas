@@ -1,4 +1,4 @@
-.modal-overlay {
+/*.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,9 +11,9 @@
   }
   
   .modal {
-    background: #fff;
+    background: #0F0F0F;
+    color: #fff;
     padding: 20px;
-    border-radius: 8px;
   }
   
   .close-button {
@@ -23,4 +23,51 @@
     cursor: pointer;
     border-radius: 4px;
     margin-bottom: 10px;
+  }*/
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal {
+    background: white;
+    padding: 20px;
+    width: 400px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .close-button {
+    align-self: flex-end;
+    cursor: pointer;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-content {
+    margin-top: 20px;
+  }
+  
+  .disciplinas {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .nota-input {
+    width: 50px;
+    margin-top: 10px;
   }
