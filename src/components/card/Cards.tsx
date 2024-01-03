@@ -1,6 +1,8 @@
 import './Cards.css'
+import notaVermelha from '../../assets/notaVermelha.svg'
+import notaAmarela from '../../assets/notaAmarela.svg'
 import notaVerde from '../../assets/notaVerde.svg'
-
+import { format } from 'date-fns'
 
 interface CardsProps {
     disciplina: string,
@@ -13,26 +15,29 @@ export default function Cards({ disciplina, dataDeLancamento, nota } : CardsProp
         const numericNota = parseFloat(nota)
 
         if(numericNota >= 0 && numericNota <= 5.9) {
-            return 'redColor'
+            return { color: 'red-color', icon: notaVermelha }
         } else if(numericNota >= 6 && numericNota <= 7.9) {
-            return 'yellowColor'
+            return { color: 'yellow-color', icon: notaAmarela }
         } else if(numericNota >= 8 && numericNota <= 10) {
-            return 'greenColor'
+            return { color: 'green-color', icon: notaVerde }
         }
-        return ''
+        return { color: '', icon: '' }
     }
 
+    const colorClasses = getTextColor()
+    const formattedDate = format(new Date(dataDeLancamento), 'dd/MM/yyyy')
+
     return (
-        <div className="cardContainer">
+        <div className="card-container">
             <div>
                 <label className="label">{ disciplina }</label>
             </div>
-            <span className='dataDeLançamento'>{ dataDeLancamento }</span>
+            <span className='data-de-lançamento'>{ formattedDate }</span>
             <div className='marcacao'>
                 <div>
-                    <img className='notaImg' src={notaVerde} alt='nota' />
+                    <img className={`notaImg ${colorClasses.color}`} src={colorClasses.icon} alt='nota' />
                 </div>
-                <span className={`nota ${getTextColor()}`}>Nota: {nota}</span>
+                <span className={`nota ${colorClasses.color}`}>Nota: {nota}</span>
             </div>
             
         </div>

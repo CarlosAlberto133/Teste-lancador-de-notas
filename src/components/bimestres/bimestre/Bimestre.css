@@ -1,4 +1,4 @@
-/*.container {
+.container {
     display: block;
     text-align: start;
 }
@@ -118,4 +118,4 @@
 .delete-button:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
-}*/
+}

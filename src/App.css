@@ -1,39 +1,44 @@
 .App { 
   background-color: #0F0F0F;
-  height: 100%;
+  min-height: 100vh;
   width: 100vw;
-  
 }
 
-.containerApp {
+.container-app {
   padding: 50px 100px;;
   background-color: #0F0F0F;
 }
 
+@media (max-width: 800px) {
+  .modal {
+    width: 450px;
+  }
+}
+
 @media (max-width: 600px) {
-  .containerApp {
-    padding: 50px 30px;
+  .container-app {
+    padding: 50px 20px;
   }
   
   .container .trash {
     margin-left: 2px;
   }
-  .infoContainer {
+  .info-container {
     margin: 20px 0 20px 0;
   }
-  .cardBiologia {
+  .card-biologia {
     margin-bottom: 25px;
   }
-  .container .cardBiologia {
+  .container .card-biologia {
     margin-bottom: 25px;
   }
-  .container .cardArtes {
+  .container .card-artes {
     margin-bottom: 25px;
   }
-  .container .cardGeografia {
+  .container .card-geografia {
     margin-bottom: 15px;
   }
-  .container .cardSociologia {
+  .container .card-sociologia {
     margin-bottom: 15px;
   }
   
@@ -43,14 +48,28 @@
     width: 58px;
     margin-right: 25px
   }
+
+  .modal {
+    width: 300px;
+    padding: 20px 40px;
+  }
+
+  .btn-confirm {
+    width: 130px;
+  }
 }
 
 @media (max-width: 430px) {
-  .containerApp {
+  .container-app {
     padding: 50px 20px;
   }
 
-  .cardContainer {
+  .card-container {
     width: 130px;
+  }
+
+  .modal {
+    width: 280px;
+    padding: 20px 40px;
   }
 }

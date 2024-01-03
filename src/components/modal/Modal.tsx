@@ -1,23 +1,23 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import X from '../../assets/X.svg'
 import './Modal.css'
 
 interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean
   onClose: () => void
-  children: React.ReactNode
   bimestreNome: string
   bimestre: string
   disciplinas: string[]
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, bimestreNome, disciplinas, bimestre, ...props }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, bimestreNome, disciplinas, bimestre, ...props }) => {
   const [selectedDisciplina, setSelectedDisciplina] = useState<string | null>(null)
   const [nota, setNota] = useState<string | null>(null)
 
   const handleDisciplinaClick = (disciplina: string) => {
     setSelectedDisciplina(disciplina)
-  };
+  }
 
   const handleConfirm = async () => {
     if(selectedDisciplina === null || nota === null) {
@@ -32,11 +32,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, bimestreNome, 
         nota: Number(nota),
       })
         onClose();
+        setNota(null)
     } catch (error) {
       console.error('Erro ao enviar dados para o banco:', error);
       alert('Erro ao enviar dados para o banco. Por favor, tente novamente.');
     }
-  };
+  }
 
   if (!isOpen) return null;
 
@@ -44,17 +45,18 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, bimestreNome, 
     <div className="modal-overlay">
       <div className="modal" {...props}>
         <div className="modal-header">
-          <h2>{bimestreNome}</h2>
+          <span className='bimestre-name'>{bimestreNome}</span>
             <button className="close-button" onClick={onClose}>
-              Fechar
+              <img src={X} alt='fechar' />
             </button>
         </div>
         <div className="modal-content">
+          <span className='disciplina-color'>Disciplina</span>
           <div className="disciplinas">
             {disciplinas.map((disciplina) => (
               <button
                 key={disciplina}
-                className={selectedDisciplina === disciplina ? 'selected' : ''}
+                className={`disciplina-button ${selectedDisciplina === disciplina ? 'selected' : ''} ${disciplina.toLowerCase()}`}
                   onClick={() => handleDisciplinaClick(disciplina)}
               >
                 {disciplina}
@@ -65,13 +67,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, bimestreNome, 
             <label>Nota:</label>
             <input
               type="number"
+              className='input-nota'
               value={nota || ''}
               onChange={(e) => setNota(e.target.value)}
             />
           </div>
-            <button onClick={handleConfirm}>Confirmar</button>
+          <div className="button-container">
+            <button className='btn-confirm' onClick={handleConfirm}>Confirmar</button>
+          </div>
         </div>
-        {children}
       </div>
     </div>
   );

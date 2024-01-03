@@ -3,10 +3,9 @@ import More from '../../assets/More.svg'
 import './BtnLancarNota.css'
 
 interface BtnLancarNotaProps {
-    onClick: () => void;
+    onClick: () => void
 }
 
-//function BtnLancarNota() {
 const BtnLancarNota: React.FC<BtnLancarNotaProps> = ({ onClick }) => {
     return (
         <div>

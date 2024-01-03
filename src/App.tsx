@@ -7,7 +7,7 @@ import './App.css'
 function App() {
   return (
     <div className='App'>
-      <div className='containerApp'>
+      <div className='container-app'>
         <div>
           <Bimestre1 />
         </div>
