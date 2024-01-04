@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import More from '../../assets/More.svg'
 import './BtnLancarNota.css'
 
@@ -9,8 +9,8 @@ interface BtnLancarNotaProps {
 const BtnLancarNota: React.FC<BtnLancarNotaProps> = ({ onClick }) => {
     return (
         <div>
-            <button 
-                className="btn" 
+            <button
+                className="btn"
                 type="button"
                 onClick={onClick}
             >

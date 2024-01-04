@@ -20,7 +20,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, bimestreNome, disciplina
   }
 
   const handleConfirm = async () => {
-    if(selectedDisciplina === null || nota === null) {
+    if (selectedDisciplina === null || nota === null) {
       alert('Por favor, selecione uma disciplina e insira uma nota.');
       return
     }
@@ -31,24 +31,32 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, bimestreNome, disciplina
         disciplina: selectedDisciplina,
         nota: Number(nota),
       })
-        onClose();
-        setNota(null)
-    } catch (error) {
-      console.error('Erro ao enviar dados para o banco:', error);
-      alert('Erro ao enviar dados para o banco. Por favor, tente novamente.');
+      onClose();
+      setNota(null)
+    } catch (error: any) {
+      if (error.response) {
+        console.error(`Erro ao obter notas do ${bimestreNome}:`, error.response.data.error)
+        alert(`${error.response.data.error}`)
+      } else if (error.request) {
+        console.error('Não houve resposta do servidor:', error.request)
+        alert('Erro: Não houve resposta do servidor')
+      } else {
+        console.error('Erro ao configurar a requisição:', error.message)
+        alert('Erro: ' + error.message)
+      }
     }
   }
 
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
     <div className="modal-overlay">
       <div className="modal" {...props}>
         <div className="modal-header">
           <span className='bimestre-name'>{bimestreNome}</span>
-            <button className="close-button" onClick={onClose}>
-              <img src={X} alt='fechar' />
-            </button>
+          <button className="close-button" onClick={onClose}>
+            <img src={X} alt='fechar' />
+          </button>
         </div>
         <div className="modal-content">
           <span className='disciplina-color'>Disciplina</span>
@@ -57,7 +65,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, bimestreNome, disciplina
               <button
                 key={disciplina}
                 className={`disciplina-button ${selectedDisciplina === disciplina ? 'selected' : ''} ${disciplina.toLowerCase()}`}
-                  onClick={() => handleDisciplinaClick(disciplina)}
+                onClick={() => handleDisciplinaClick(disciplina)}
               >
                 {disciplina}
               </button>
@@ -78,7 +86,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, bimestreNome, disciplina
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal

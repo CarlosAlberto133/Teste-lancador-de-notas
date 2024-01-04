@@ -7,10 +7,10 @@ import './Bimestre.css'
 import Modal from '../../modal/Modal'
 
 interface Nota {
-  id: string;
-  disciplina: string;
-  criadoEm: string;
-  nota: string;
+  id: string
+  disciplina: string
+  criadoEm: string
+  nota: string
 }
 
 interface BimestreProps {
@@ -20,12 +20,12 @@ interface BimestreProps {
 }
 
 function Bimestre({ bimestreNome, disciplinas, bimestreAtual }: BimestreProps) {
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    const [notas, setNotas] = useState<Nota[]>([])
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [notas, setNotas] = useState<Nota[]>([])
 
   const handleOpenModal = () => {
     setIsModalOpen(true)
-  };
+  }
 
   const handleCloseModal = () => {
     setIsModalOpen(false)
@@ -40,20 +40,29 @@ function Bimestre({ bimestreNome, disciplinas, bimestreAtual }: BimestreProps) {
       console.error('Erro ao excluir nota:', error)
     }
   }
-  
+
   const fetchData = async () => {
     try {
       const response = await axios.get<Nota[]>(`http://localhost:3333/resultados/${bimestreNome}`)
-      setNotas(response.data ?? []);
-    } catch (error) {
-      console.error(`Erro ao obter notas do ${bimestreNome}:`, error)
+      setNotas(response.data ?? [])
+    } catch (error: any) {
+      if (error.response) {
+        console.error(`Erro ao obter notas do ${bimestreNome}:`, error.response.data.error)
+        alert(`Erro: ${error.response.data.error}\nDetalhes: ${error.response.data.errorMessage}`)
+      } else if (error.request) {
+        console.error('Não houve resposta do servidor:', error.request)
+        alert('Erro: Não houve resposta do servidor')
+      } else {
+        console.error('Erro ao configurar a requisição:', error.message)
+        alert('Erro: ' + error.message)
+      }
     }
   }
-  
+
   useEffect(() => {
     fetchData()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[bimestreNome]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bimestreNome])
 
   return (
     <div className='container'>
@@ -91,7 +100,7 @@ function Bimestre({ bimestreNome, disciplinas, bimestreAtual }: BimestreProps) {
         bimestreNome={bimestreAtual}
       />
     </div>
-  );
+  )
 }
 
-export default Bimestre;
+export default Bimestre
